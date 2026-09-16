@@ -106,7 +106,7 @@ def load_fallback_sample() -> list[dict]:
         with open(sample_path) as f:
             return [json.loads(line) for line in f]
 
-    print("[setup] No fallback sample found — writing a tiny bootstrap sample.")
+    print("[setup] No fallback sample found. Writing a tiny bootstrap sample.")
     bootstrap = [
         {
             "question": "TypeError: can't multiply sequence by non-int of type 'float'",

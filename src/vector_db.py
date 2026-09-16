@@ -58,7 +58,7 @@ def get_embedding_function():
         logger.info(f"Using OpenAI embeddings: {model_name or 'text-embedding-3-small'}")
         return OpenAIEmbeddings(model=model_name or "text-embedding-3-small")
 
-    # local sentence-transformers — free, no key
+    # local sentence-transformers, free, no key
     from langchain_huggingface import HuggingFaceEmbeddings
 
     logger.info(f"Using local sentence-transformers embeddings: {model_name}")

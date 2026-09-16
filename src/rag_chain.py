@@ -23,18 +23,20 @@ report and several similar Stack Overflow question/answer pairs retrieved \
 for relevance. Using ONLY the retrieved context (plus general debugging \
 knowledge if the context is insufficient), produce:
 
-1. Root cause — your best hypothesis for what's causing the bug.
-2. Likely solutions — a short ordered list of concrete fixes to try.
-3. Confidence — High / Medium / Low, with a one-line reason (e.g. "High: \
+1. Root cause: your best hypothesis for what's causing the bug.
+2. Likely solutions: a short ordered list of concrete fixes to try.
+3. Confidence: High / Medium / Low, with a one-line reason (e.g. "High: \
 retrieved context directly matches the error message").
 
-Be concise. If the retrieved context doesn't clearly match the bug, say so \
-explicitly in the confidence line rather than fabricating a diagnosis."""
+Be concise and write like a helpful colleague, not a report generator. \
+Never use em dashes; use commas, periods, or parentheses instead. If the \
+retrieved context doesn't clearly match the bug, say so explicitly in the \
+confidence line rather than fabricating a diagnosis."""
 
 
 def load_vectordb():
-    # Builds the index from data/so_qa.jsonl if it's missing/empty —
-    # needed on ephemeral deployments (e.g. HF Spaces free tier) where
+    # Builds the index from data/so_qa.jsonl if it's missing/empty.
+    # Needed on ephemeral deployments (e.g. free-tier hosts) where
     # data/chroma_db/ doesn't survive a restart.
     from langchain_chroma import Chroma
 
@@ -50,7 +52,7 @@ def load_vectordb():
     if vectordb._collection.count() == 0:
         from src.vector_db import build_index, load_records, to_documents
 
-        logger.info(f"'{collection_name}' is empty — building index from data/so_qa.jsonl")
+        logger.info(f"'{collection_name}' is empty, building index from data/so_qa.jsonl")
         records = load_records()
         docs = to_documents(records)
         vectordb = build_index(docs, embedding_fn)
@@ -72,14 +74,14 @@ def build_context_block(results) -> str:
 
 
 def get_llm():
-    # LLM_PROVIDER=groq (default, free) or openai (billed — no free tier).
+    # LLM_PROVIDER=groq (default, free) or openai (billed, no free tier).
     provider = os.getenv("LLM_PROVIDER", "groq").lower()
 
     if provider == "openai":
         from langchain_openai import ChatOpenAI
 
         model = os.getenv("OPENAI_CHAT_MODEL", "gpt-4o-mini")
-        logger.info(f"Using OpenAI chat model: {model} (billed — no free tier)")
+        logger.info(f"Using OpenAI chat model: {model} (billed, no free tier)")
         return ChatOpenAI(model=model, temperature=0.2)
 
     from langchain_groq import ChatGroq

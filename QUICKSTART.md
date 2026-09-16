@@ -14,7 +14,7 @@ pip install -r requirements.txt
 
 # 3. Configure environment
 cp .env.example .env
-# Fill in GROQ_API_KEY — free, no card, get one at console.groq.com/keys
+# Fill in GROQ_API_KEY (free, no card; get one at console.groq.com/keys)
 
 # 4. Download + prep data
 python setup.py
@@ -32,16 +32,16 @@ streamlit run deployed/app.py
 ## Local-only path (no API key at all)
 
 Steps 4-5 above run fully locally, no key needed (`EMBEDDING_MODE=local:...`
-by default). Steps 6-7 need `GROQ_API_KEY` for the synthesis step — until
+by default). Steps 6-7 need `GROQ_API_KEY` for the synthesis step. Until
 then, retrieval alone is testable via `src/vector_db.py`'s built-in
 `test_retrieval()` call.
 
 ## Troubleshooting
 
-- **`FileNotFoundError: data/so_qa.jsonl`** — run `python setup.py` first.
-- **Hugging Face download fails / no network** — `setup.py` falls back to
+- **`FileNotFoundError: data/so_qa.jsonl`**: run `python setup.py` first.
+- **Hugging Face download fails / no network**: `setup.py` falls back to
   a tiny bundled sample so you can still exercise the pipeline end-to-end.
-- **Groq 404 "model_not_found"** — see `.env.example` for how to list
+- **Groq 404 "model_not_found"**: see `.env.example` for how to list
   currently available models with your key.
-- **`chromadb` import errors on Apple Silicon / older Python** — pin to
+- **`chromadb` import errors on Apple Silicon / older Python**: pin to
   the versions in `requirements.txt`; newer/older combos sometimes clash.

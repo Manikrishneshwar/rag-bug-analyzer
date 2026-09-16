@@ -1,6 +1,6 @@
 # --- Core RAG stack ---
 # langchain-core is pinned explicitly because langchain-groq needs >=0.3.75
-# and langchain-huggingface (below) needs <0.4.0 — this is the version
+# and langchain-huggingface (below) needs <0.4.0. This is the version
 # that satisfies every package's range at once. If you bump any
 # langchain-* package above, re-check this pin still satisfies all of them.
 langchain-core==0.3.86

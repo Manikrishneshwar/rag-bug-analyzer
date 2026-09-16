@@ -1,4 +1,4 @@
-"""Minimal smoke tests — catch import/wiring errors early."""
+"""Minimal smoke tests. Catch import/wiring errors early."""
 import sys
 from pathlib import Path
 
