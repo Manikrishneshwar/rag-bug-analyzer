@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.env
+data/chroma_db/
+# data/so_qa.jsonl is intentionally NOT ignored — it's committed as seed
+# data so deployments with an ephemeral filesystem (e.g. HF Spaces free
+# tier) can rebuild the vector index on cold start without needing
+# network access to re-download from Hugging Face. See
+# src/phase_1_3_rag_chain.py's load_vectordb().
+.venv/
+venv/
+.streamlit/
+*.egg-info/
+.pytest_cache/
+.DS_Store

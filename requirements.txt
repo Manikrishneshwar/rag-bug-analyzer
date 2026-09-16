@@ -1,0 +1,32 @@
+# --- Core RAG stack ---
+# langchain-core is pinned explicitly because langchain-groq needs >=0.3.75
+# and langchain-huggingface (below) needs <0.4.0 — this is the version
+# that satisfies every package's range at once. If you bump any
+# langchain-* package above, re-check this pin still satisfies all of them.
+langchain-core==0.3.86
+langchain==0.3.27
+langchain-community==0.3.27
+langchain-openai==0.3.15
+langchain-groq==0.3.8
+langchain-chroma==0.1.4
+chromadb==0.5.20
+
+# --- Embeddings (choose one path; both installed so you can switch freely) ---
+openai==1.68.2
+sentence-transformers==3.3.1
+langchain-huggingface==0.3.0
+
+# --- Data ---
+datasets==3.1.0          # Hugging Face Stack Overflow dataset loading
+pandas==2.2.3
+
+# --- UI ---
+streamlit==1.40.1
+
+# --- Utilities ---
+python-dotenv==1.0.1
+tqdm==4.67.1
+tiktoken==0.8.0
+
+# --- Dev / QA ---
+pytest==8.3.3
