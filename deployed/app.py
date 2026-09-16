@@ -151,8 +151,6 @@ st.divider()
 st.markdown(
     '<p class="footer-note">A diagnosis is only as good as the Stack Overflow '
     "threads it can find. Vague queries or genuinely novel bugs will get a "
-    "low-confidence or generic answer, and that's the system being honest "
-    "rather than guessing. See README.md for more on how this works and "
-    "where it falls short.</p>",
+    "low-confidence or generic answer.</p>",
     unsafe_allow_html=True,
 )

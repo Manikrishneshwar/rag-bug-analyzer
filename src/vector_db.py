@@ -67,10 +67,21 @@ def get_embedding_function():
 
 @timed
 def build_index(docs, embedding_fn):
+    import chromadb
     from langchain_chroma import Chroma
 
     persist_dir = os.getenv("CHROMA_PERSIST_DIR", "./data/chroma_db")
     collection_name = os.getenv("CHROMA_COLLECTION_NAME", "stackoverflow_qa")
+
+    # Chroma.from_documents appends to an existing collection rather than
+    # replacing it, so rerunning this script on refreshed data would just
+    # accumulate duplicates. Clear any prior collection of the same name first.
+    client = chromadb.PersistentClient(path=persist_dir)
+    try:
+        client.delete_collection(name=collection_name)
+        logger.info(f"Cleared existing collection '{collection_name}' before rebuilding")
+    except Exception:
+        pass  # collection didn't exist yet, nothing to clear
 
     vectordb = Chroma.from_documents(
         documents=docs,
